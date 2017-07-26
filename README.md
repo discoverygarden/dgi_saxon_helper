@@ -31,8 +31,8 @@ Current maintainers:
 ## Development
 
 If you would like to contribute to this module, please check out our helpful
-[Documentation](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers)
-info, [Developers](http://islandora.ca/developers) section on Islandora.ca and
+[Documentation](https://github.com/Islandora/islandora/wiki#wiki-documentation-for-developers),
+[Developers](http://islandora.ca/developers) section on Islandora.ca and
 contact [discoverygarden](http://support.discoverygarden.ca).
 
 ## License
