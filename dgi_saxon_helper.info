@@ -1,0 +1,5 @@
+name = DGI Saxon Helper
+description = Utility module to facilitate calls using Saxon XSLT.
+package = Islandora Tools
+core = 7.x
+files[] = includes/DgiSaxonHelperTransformationException.class.inc

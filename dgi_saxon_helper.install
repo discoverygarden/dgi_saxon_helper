@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Hook for (un)installation and updating.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function dgi_saxon_helper_uninstall() {
+  $variables = array(
+    'dgi_saxon_helper_executable',
+  );
+
+  array_map('variable_del', $variables);
+}
