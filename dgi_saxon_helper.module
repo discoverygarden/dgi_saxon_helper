@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * @file
+ * General hooks.
+ */
+
+const DGI_SAXON_HELPER_DEFAULT_EXECUTABLE_PATH = '/usr/bin/saxonb-xslt';
+
+/**
+ * Implements hook_menu().
+ */
+function dgi_saxon_helper_menu() {
+  $item = array();
+
+  $item['admin/islandora/tools/dgi_saxon_helper'] = array(
+    'title' => 'Saxon XSLT',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dgi_saxon_helper_admin_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'includes/admin.form.inc',
+  );
+
+  return $item;
+}

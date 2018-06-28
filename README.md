@@ -1,15 +1,12 @@
-# MODULE NAME
+# DGI Saxon Helper
 
 ## Introduction
 
-DESCRIPTION
+Helper module for running XSLT 2.0 transformations with Saxon-B.
 
 ## Requirements
 
-This module requires the following modules/libraries:
-
-* [Islandora](https://github.com/islandora/islandora)
-* [Tuque](https://github.com/islandora/tuque)
+Saxon-B must be installed.
 
 ## Installation
 
