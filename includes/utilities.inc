@@ -68,7 +68,7 @@ function dgi_saxon_helper_transform($input, $output, $xslt, array $params = arra
   $command = variable_get('dgi_saxon_helper_executable', DGI_SAXON_HELPER_DEFAULT_EXECUTABLE_PATH);
 
   try {
-    $process = proc_open("$command -versionmsg:off -ext:on - $xslt_path $param_string",
+    $process = proc_open("$command -versionmsg:off -ext:on - '$xslt_path' $param_string",
       array(
         0 => $input,
         1 => $output,
