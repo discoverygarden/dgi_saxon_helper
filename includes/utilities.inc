@@ -58,7 +58,7 @@ function dgi_saxon_helper_transform_string_to_string($xslt_path, $xml, array $pa
  *   Thrown if the transformation outputs anything to stderr.
  */
 function dgi_saxon_helper_transform($input, $output, $xslt, array $params = array()) {
-  $xslt_path = drupal_realpath($xslt);
+  $xslt_path = escapeshellarg(drupal_realpath($xslt));
   $pipes = array();
   $equal_join_and_escape = function ($key, $value) {
     return escapeshellarg("$key=$value");
@@ -68,7 +68,7 @@ function dgi_saxon_helper_transform($input, $output, $xslt, array $params = arra
   $command = variable_get('dgi_saxon_helper_executable', DGI_SAXON_HELPER_DEFAULT_EXECUTABLE_PATH);
 
   try {
-    $process = proc_open("$command -versionmsg:off -ext:on - '$xslt_path' $param_string",
+    $process = proc_open("$command -versionmsg:off -ext:on - $xslt_path $param_string",
       array(
         0 => $input,
         1 => $output,
