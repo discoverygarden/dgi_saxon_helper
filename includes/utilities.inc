@@ -50,25 +50,34 @@ function dgi_saxon_helper_transform_string_to_string($xslt_path, $xml, array $pa
  *   A stream/file resource to capture the output of the transformation.
  * @param string $xslt
  *   A path/URI to the XSLT to use.
- * @param array $params
+ * @param array $xslt_params
  *   An associative array of parameters to pass to the XSLT, keys as parameter
  *   names, values as values.
+ * @param array $saxon_params
+ *   An array of parameters to pass of to Saxon. Defaults to opening the source
+ *   from stdin.
  *
  * @throws DgiSaxonHelperTransformationException
  *   Thrown if the transformation outputs anything to stderr.
  */
-function dgi_saxon_helper_transform($input, $output, $xslt, array $params = array()) {
+function dgi_saxon_helper_transform($input, $output, $xslt, array $xslt_params = array(), array $saxon_params = array('s' => '-')) {
+  $module_path = drupal_get_path('module', 'dgi_saxon_helper');
   $xslt_path = escapeshellarg(drupal_realpath($xslt));
   $pipes = array();
-  $equal_join_and_escape = function ($key, $value) {
-    return escapeshellarg("$key=$value");
-  };
-  $escaped = array_map($equal_join_and_escape, array_keys($params), $params);
-  $param_string = implode(' ', $escaped);
-  $command = variable_get('dgi_saxon_helper_executable', DGI_SAXON_HELPER_DEFAULT_EXECUTABLE_PATH);
 
+  $parameters = fopen('php://temp', 'r+b');
+  foreach ($xslt_params as $xsl_key => $xsl_value) {
+    fwrite($parameters, "$xsl_key=$xsl_value\n");
+  }
+  fseek($parameters, 0);
+  $saxon_params_escape = function ($key, $value) {
+    return escapeshellarg("-$key:$value");
+  };
+  $saxon_escaped = array_map($saxon_params_escape, array_keys($saxon_params), $saxon_params);
+  $saxon_param_string = implode(' ', $saxon_escaped);
+  $command = variable_get('dgi_saxon_helper_executable', DGI_SAXON_HELPER_DEFAULT_EXECUTABLE_PATH);
   try {
-    $process = proc_open("$command -versionmsg:off -ext:on - $xslt_path $param_string",
+    $process = proc_open("bash $module_path/shell_scripts/saxonb-xslt.sh $command $saxon_param_string $xslt_path",
       array(
         0 => $input,
         1 => $output,
@@ -76,8 +85,11 @@ function dgi_saxon_helper_transform($input, $output, $xslt, array $params = arra
           'pipe',
           'w',
         ),
+        3 => $parameters,
       ),
-      $pipes
+      $pipes,
+      NULL,
+      array('LANG' => 'en_US.UTF-8')
     );
 
     // If the stderr pipe was written to, something went wrong.
