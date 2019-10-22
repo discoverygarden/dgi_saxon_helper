@@ -6,7 +6,7 @@ saxon_params=$2
 transform_file=$3
 
 declare -a escaped_array
-while read -u 3 p; do
+while read -d$'\036' -u 3 p; do
   escaped_array+=("$p")
 done
 
