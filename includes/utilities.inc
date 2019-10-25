@@ -67,7 +67,7 @@ function dgi_saxon_helper_transform($input, $output, $xslt, array $xslt_params =
 
   $parameters = fopen('php://temp', 'r+b');
   foreach ($xslt_params as $xsl_key => $xsl_value) {
-    fwrite($parameters, "$xsl_key=$xsl_value\n");
+    fwrite($parameters, "$xsl_key=$xsl_value\036");
   }
   fseek($parameters, 0);
   $saxon_params_escape = function ($key, $value) {
