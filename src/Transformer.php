@@ -116,10 +116,12 @@ class Transformer {
     };
     $saxon_escaped = array_map($saxon_params_escape, array_keys($saxon_params), $saxon_params);
     $saxon_param_string = implode(' ', $saxon_escaped);
-    $saxon_command = escapeshellarg($this->config->get('saxon_executable'));
-    assert(is_executable($saxon_command), 'Saxon is executable.');
-    $bash_command = escapeshellarg($this->config->get('bash_executable'));
-    assert(is_executable($bash_command), 'Bash is executable.');
+    $saxon_executable = $this->config->get('saxon_executable');
+    assert(is_executable($saxon_executable), 'Saxon is executable.');
+    $saxon_command = escapeshellarg($saxon_executable);
+    $bash_executable = $this->config->get('bash_executable');
+    assert(is_executable($bash_executable), 'Bash is executable.');
+    $bash_command = escapeshellarg($bash_executable);
     try {
       $process = proc_open(
         implode(' ', [
