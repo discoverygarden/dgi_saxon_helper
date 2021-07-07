@@ -1,0 +1,5 @@
+{
+  "name": "discoverygarden/dgi_saxon_helper",
+  "description": "Service implementing methods for executing XSLTs using Saxon.",
+  "type": "drupal-module"
+}
