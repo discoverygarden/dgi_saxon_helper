@@ -5,10 +5,13 @@ namespace Drupal\dgi_saxon_helper_migrate\Plugin\migrate\process;
 use Drupal\dgi_saxon_helper\TransformationException;
 use Drupal\dgi_saxon_helper\TransformerInterface;
 use Drupal\migrate\MigrateExecutableInterface;
+use Drupal\migrate\MigrateSkipRowException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Perform a transformation using Saxon.
@@ -71,7 +74,9 @@ class Saxon extends ProcessPluginBase implements ContainerFactoryPluginInterface
       return $this->service->transformStringToString($this->xslt, $value, $this->params);
     }
     catch (TransformationException $e) {
-      throw new MigrationSkipRowException('Failed to transform MODS.');
+      throw new MigrateSkipRowException(strtr('Failed to transform MODS: !message', [
+        '!message' => $e->getMessage(),
+      ]));
     }
   }
 
