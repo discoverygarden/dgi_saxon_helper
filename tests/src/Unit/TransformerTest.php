@@ -11,6 +11,8 @@ use Drupal\dgi_saxon_helper\Transformer;
 
 /**
  * Transformer service test(s).
+ *
+ * @group dgi_saxon_helper
  */
 class TransformerTest extends UnitTestCase {
 
