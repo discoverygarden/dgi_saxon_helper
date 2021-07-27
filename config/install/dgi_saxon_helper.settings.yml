@@ -1,0 +1,3 @@
+---
+saxon_executable: '/usr/bin/saxonb-xslt'
+bash_executable: '/bin/bash'

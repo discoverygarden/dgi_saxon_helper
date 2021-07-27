@@ -1,0 +1,8 @@
+---
+services:
+  dgi_saxon_helper.transformer:
+    class: \Drupal\dgi_saxon_helper\Transformer
+    arguments:
+      - '@file_system'
+      - '@module_handler'
+      - '@config.factory'

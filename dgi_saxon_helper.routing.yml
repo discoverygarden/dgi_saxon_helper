@@ -1,0 +1,8 @@
+---
+dgi_saxon_helper.settings:
+  path: '/admin/config/media/dgi_saxon_helper'
+  defaults:
+    _form: '\Drupal\dgi_saxon_helper\Form\Settings'
+    _title: 'DGI Saxon Helper Config'
+  requirements:
+    _permission: 'administer site configuration'
