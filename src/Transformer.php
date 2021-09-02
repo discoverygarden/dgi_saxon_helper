@@ -51,7 +51,7 @@ class Transformer extends AbstractTransformer {
    */
   public function transform($input, $output, $xslt, array $xslt_params = [], array $saxon_params = ['s' => '-']) {
     $module_path = $this->moduleHandler->getModule('dgi_saxon_helper')->getPath();
-    $xslt_path = escapeshellarg($this->fileSystem->realpath($xslt));
+    $xslt_path = escapeshellarg($this->ensureDereferencable($xslt));
     $pipes = [];
 
     $parameters = fopen('php://temp', 'r+b');
@@ -105,6 +105,24 @@ class Transformer extends AbstractTransformer {
         proc_close($process);
       }
     }
+  }
+
+  /**
+   * Helper; ensure the given XSLT should be dereferencable by Saxon.
+   *
+   * @param string $xslt
+   *   The XSLT to manipulate.
+   *
+   * @return string
+   *   A URI/path which Saxon should be able to dereference to fetch the
+   *   underlying resource.
+   */
+  protected function ensureDereferencable($xslt) {
+    $scheme = $this->fileSystem->uriScheme($xslt);
+    if (in_array($scheme, ['http', 'https'])) {
+      return $xslt;
+    }
+    return $this->fileSystem->realpath($xslt);
   }
 
 }
