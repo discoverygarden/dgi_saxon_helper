@@ -52,7 +52,7 @@ class Transformer extends AbstractTransformer {
    */
   public function transform($input, $output, $xslt, array $xslt_params = [], array $saxon_params = ['s' => '-']) {
     $module_path = $this->moduleHandler->getModule('dgi_saxon_helper')->getPath();
-    list($xslt_path, $additional_descriptors) = $this->ensureDereferencable($xslt);
+    [$xslt_path, $additional_descriptors] = $this->ensureDereferencable($xslt);
     $pipes = [];
 
     $parameters = fopen('php://temp', 'r+b');
@@ -141,7 +141,7 @@ class Transformer extends AbstractTransformer {
         // XXX: Control the number of items in our file cache/stash business...
         // We only expect one for now, but... paranoia?
         if (count(static::$files) >= 10) {
-          list($to_cull, $to_keep) = array_chunk(static::$files, 5);
+          [$to_cull, $to_keep] = array_chunk(static::$files, 5);
           array_map('fclose', $to_cull);
           static::$files = $to_keep;
         }
