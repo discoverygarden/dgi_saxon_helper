@@ -10,13 +10,13 @@ Saxon-B must be installed.
 
 ## Installation
 
-Install as usual, see 
-[this](https://drupal.org/documentation/install/modules-themes/modules-7) for 
+Install as usual, see
+[this](https://www.drupal.org/docs/extending-drupal/installing-modules) for
 further information.
 
 ## Troubleshooting/Issues
 
-Having problems or solved a problem? Contact 
+Having problems or solved a problem? Contact
 [discoverygarden](http://support.discoverygarden.ca).
 
 ## Maintainers/Sponsors
