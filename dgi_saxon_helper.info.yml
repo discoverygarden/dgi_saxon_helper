@@ -1,6 +1,6 @@
 name: DGI Saxon Helper
 description: Utility module to facilitate calls using Saxon XSLT.
 package: DGI
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 configure: dgi_saxon_helper.settings
 type: module

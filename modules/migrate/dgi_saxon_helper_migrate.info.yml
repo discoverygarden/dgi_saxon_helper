@@ -1,7 +1,7 @@
 name: DGI Saxon Helper Migrate
 description: Utility module to facilitate calls using Saxon XSLT from migrations.
 package: DGI
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 type: module
 dependencies:
   - dgi_saxon_helper:dgi_saxon_helper
