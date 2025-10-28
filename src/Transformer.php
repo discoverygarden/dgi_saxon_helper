@@ -40,7 +40,7 @@ class Transformer extends AbstractTransformer {
   public function __construct(
     FileSystemInterface $file_system,
     ModuleHandlerInterface $module_handler,
-    ConfigFactoryInterface $config_factory
+    ConfigFactoryInterface $config_factory,
   ) {
     $this->fileSystem = $file_system;
     $this->moduleHandler = $module_handler;
